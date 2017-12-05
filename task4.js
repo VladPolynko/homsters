@@ -20,18 +20,21 @@ const types = [
     },
 ];
 
-function typeGenerator(typeMessages, finishType = []) {
-    for (let i = 0; i < types.length; i++) {
-        let value = types[i];
+function typeGenerator (value) {
+    let result = [];
 
-        if (typeMessages >= value.code) {
-            finishType.push(value);
-            typeMessages = typeMessages - value.code;
-            --i;
+    for (let i = 0; i < types.length; i++) {
+        let type = types[i];
+        let localResult = value;
+
+        localResult = localResult & type.code;
+
+        if(localResult) {
+            result.push(type.key)
         }
     }
 
-    return finishType;
+    return result;
 }
 
 console.log(typeGenerator(142));
